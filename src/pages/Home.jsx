@@ -1,6 +1,7 @@
 import React from 'react';
-//import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom'
 import Navbar from '../components/Navbar';
+import '../components/w3.css'
 
 const Home = () => {
     return (
@@ -11,7 +12,7 @@ const Home = () => {
             <div className="w3-container w3-animate-opacity">
                 <h3>Home Page</h3>
                 <p>Please choose your options from top-bar, this page is yet not fully configured. please wait unitll some chanbges.</p>
-                <a href="/newimg" className="w3-btn w3-green">Image</a>
+                <Link to="/newimg" className="w3-btn w3-green">Image</Link>
             </div>
         </div>
     );

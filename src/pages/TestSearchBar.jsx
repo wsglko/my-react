@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import {SearchBar} from '../components/SearchBar'
 import axios from 'axios'
-import './mycss.css'
+//import './mycss.css'
 
 const TestSearchBar = () => {
     const [Search, setSearch] = React.useState("");

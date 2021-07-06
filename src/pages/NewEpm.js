@@ -10,6 +10,9 @@ const NewEpm = () => {
     const { bstID, bstName } = useParams()
     const [bstid, setBstid] = useState(bstID)
     const [bstname, setBstname] = useState(bstName)
+    const [preReading, setPreReading] = useState("")
+    const [currReading, setCurrReading] = useState("")
+    const [dfReading, setDfReading] = useState("")
     const [reqid, setReqid] = useState(0)
     const [billdate, setBilldate] = useState(new Date())
     const [billamount, setBillamount] = useState(0)
@@ -21,13 +24,13 @@ const NewEpm = () => {
     const [remarks, setRemarks] = useState("")
     const [updateon, setUpdateon] = useState(new Date())
 
-    const formData = {"bst_id":bstid, "bst_name":bstname, "req_id":reqid, "bill_date":billdate, "bill_amount":billamount, "benif_name":benifname, "status":ebStatus, "status_date":StatusDate, "remarks":remarks, "update_on":updateon}
+    const formData = {"bst_id":bstid, "bst_name":bstname, "pre_reading":preReading, "curr_reading":currReading, "billed_units":dfReading, "req_id":reqid, "bill_date":billdate, "bill_amount":billamount, "benif_name":benifname, "status":ebStatus, "status_date":StatusDate, "remarks":remarks, "update_on":updateon}
     const postData = () => {
         axios.post("https://sksinfo.000webhostapp.com/api-add/add-sify-epm.php", JSON.stringify(formData))
             .then(res => {
                 if (res.data === "inserted") {
                     alert("Data Posted")
-                    return <Redirect to="/bstlist" />
+                    history.push("/bstlist")
                 } else {
                     alert("Error: " + res.data)
                     console.log(res.data)
@@ -68,6 +71,27 @@ const NewEpm = () => {
                 <br />
                 <div className="w3-cell-row">
                     <div className="w3-container w3-cell w3-mobile">
+                        <label className="w3-text"><strong>Previous Reading:</strong></label>
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <input type="text" className="w3-input" value={preReading} onChange={(e)=>setPreReading(e.target.value)} />
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <label className="w3-text"><strong>Current Reading:</strong></label>
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <input type="text" className="w3-input" value={currReading} onChange={(e)=>setCurrReading(e.target.value)} />
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <label className="w3-text"><strong>Billed Units:</strong></label>
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <input type="text" className="w3-input" value={dfReading} onChange={(e)=>setDfReading(e.target.value)} />
+                    </div>
+                </div>
+                <br />
+                <div className="w3-cell-row">
+                    <div className="w3-container w3-cell w3-mobile">
                         <label className="w3-text"><strong>Bill Date:</strong></label>
                     </div>
                     <div className="w3-container w3-cell w3-mobile">
@@ -101,7 +125,7 @@ const NewEpm = () => {
                         {status.map((s, key)=>(
                             <div key={key}>
                                 {statusKey === key ? <button onClick={()=>setEbStatus(s)} className="w3-bar-item w3-button w3-green w3-small">{s}</button> :
-                                    <button onClick={(e) => { setStatusKey(key);setEbStatus(s)}} className="w3-bar-item w3-button w3-white w3-small">{s}</button>}
+                                    <button onClick={() => { setStatusKey(key);setEbStatus(s)}} className="w3-bar-item w3-button w3-white w3-small">{s}</button>}
                             </div>
                         ))}
                         </div>

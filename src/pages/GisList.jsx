@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from 'react'
-import { useHistory  } from 'react-router-dom'
+import { useHistory,useParams  } from 'react-router-dom'
 import axios from 'axios'
 import {SearchBar} from '../components/SearchBar'
 
-function GisList(){
+function GisList() {
+  const {bstName} = useParams()
   const [gisData,setGisData] = useState([]);
-  const [Search, setSearch] = useState("");
+  const [Search, setSearch] = useState(bstName);
   useEffect(()=> {
     const fethData = async () => {
       const res = await axios.get("https://wsglko.000webhostapp.com/api/gis-data.php");

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams, useHistory, Redirect  } from 'react-router-dom'
+import { useParams, useHistory  } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import axios from 'axios'
 import DatePicker from 'react-date-picker'
@@ -13,8 +13,10 @@ const NewImage = () => {
     const [imgDate, setImgDate] = useState(new Date())
     const [imgCat, setImgCat] = useState("Official")
     const [imgDetails, setImgDetails] = useState("")
+    const [updateBy, setUpdateBy] = useState("")
+    const [updateOn, setUpdateOn] = useState(new Date())
 
-    const imageDetails = { "delUrl": delUrl, "viewUrl": viewUrl, "imgDate": imgDate, "imgCat": imgCat, "imgDetails": imgDetails }
+    const imageDetails = { "delUrl": delUrl, "viewUrl": viewUrl, "imgDate": imgDate, "imgCat": imgCat, "imgDetails": imgDetails, "updateBy": updateBy, "updateOn": updateOn }
     
     const selImage = (e) => {
         setImgName(e.target.files[0])
@@ -42,11 +44,11 @@ const NewImage = () => {
             })
     }
     const saveData = () => {
-        axios.post("https://main-qovery--kuik95p94p9opbga-gtw.qovery.io/api/newimage",imageDetails)
+        axios.post("https://main-qovery--pqt2vjn0u4yghzyy-gtw.qovery.io/api/newimage",imageDetails)
                         .then(res => {
                             if (res.data.status === true) {
                                 alert("Data Added")
-                                history.push('/')
+                                history.push('/snaps')
                             } else {
                                 alert("Error")
                             }
@@ -85,7 +87,7 @@ const NewImage = () => {
             <br />
             <br />
             <div>
-                {loading === true ? <img src={viewUrl} width="250" height="250" alt={viewUrl}/> : <h5>Image not selected</h5>}
+                {loading === true ? <img src={viewUrl} width="150" height="250" alt={viewUrl}/> : <h5>Image not selected</h5>}
             </div>
             <br />
         </div>
