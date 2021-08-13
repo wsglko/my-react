@@ -6,6 +6,8 @@ import axios from 'axios'
 import moment from 'moment'
 import Modal from '../../components/Modal'
 import DatePicker from 'react-date-picker'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Epm = () => {
     let history = useHistory
@@ -16,14 +18,15 @@ const Epm = () => {
     const [show, setShow] = useState(false)
     const [StatusDate, setStatusDate] = useState(new Date())
     useEffect(() => {
-        const searchTxt = { "searchBst": "no", "searchText": search }
+        //const searchTxt = { "action": "reqAllData" }
         //axios.post("https://sksinfo.000webhostapp.com/api/sify-epm.php",JSON.stringify(searchTxt))
-        axios.get("https://sksinfo.000webhostapp.com/api/sify-epm.php")
+        axios.post("https://sksinfo.000webhostapp.com/api/sify-epm.php",JSON.stringify({"action":"reqAllData"}))
             .then(res => {
                 if (res.data == null) {
-                    alert("Data not found based on your Search criteria...")
+                    toast.warning("Data not found based on your Search criteria...")
                 } else {
                     setEmpList(res.data)
+                    toast.success("Data Found");
                 }
             }).catch(err => {
                 console.warn(err)
@@ -34,10 +37,10 @@ const Epm = () => {
         axios.post("https://sksinfo.000webhostapp.com/api-delete/delete-epm.php", JSON.stringify({ "id": value }))
             .then(res => {
                 if (res.data == "deleted") {
-                    alert("Record Deleted")
+                    toast.success("Record Deleted")
                     history.push("/epm")
                 } else {
-                    alert("Please try again later")
+                    toast.warning("Please try again later")
                 }
             }).catch(err => {
                 console.log(err)
@@ -85,6 +88,7 @@ const Epm = () => {
                 <Modal show={show} handleClose={(e)=>setShow(false)}>
                     <p>Modal</p>
                 </Modal>
+                <ToastContainer />
             </div>
         </div>
     )

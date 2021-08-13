@@ -17,7 +17,7 @@ import NewColoProvider from './pages/Infra/NewColoProvider';
   
 const App = () => {
   return (
-    <BrowserRouter basename="/sksapp">
+    <BrowserRouter basename="/sifyApp">
       <Route exact path="/" component={Home}/>
       <Route exact path="/hygiene" component={Hygiene}/>
       <Route exact path="/gis/:bstName" component={GisList}/>

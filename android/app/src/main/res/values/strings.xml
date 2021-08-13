@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">sifyApp</string>
+    <string name="title_activity_main">sifyApp</string>
+    <string name="package_name">com.sifyApp.android</string>
+    <string name="custom_url_scheme">com.sifyApp.android</string>
+</resources>

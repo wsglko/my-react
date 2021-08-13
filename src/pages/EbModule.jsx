@@ -3,20 +3,29 @@ import { useParams, useHistory, Link  } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import moment from 'moment'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EbModule = () => {
     const {bstID,bstName} = useParams()
     const [data, setData] = useState([])
-    const Search = { "searchBst": "yes", "searchText": bstID }
-    let history = useHistory()
+    
+    let history = useHistory();
     useEffect(() => {
+        const Search = { "action": "reqSingleData", "searchText": bstID }
         axios.post("https://sksinfo.000webhostapp.com/api/sify-epm.php", JSON.stringify(Search))
             .then(res => {
-                if (res.data === null) {
-                    alert("No Data found")
-                } else {
-                    setData(res.data)
-                    //console.table(res.data)
+                console.log(res);
+                if (res.data === "invalid-request") {
+                    toast.error("Invalid Request")
+                    return;
+                } else if (res.data === null) {
+                    toast.info("No Data found with this BST");
+                    setData(null);
+                    return;
+                 } else {
+                    toast.success("Data Found");
+                    setData(res.data);
                 }
             })
             .catch(err => {
@@ -24,9 +33,9 @@ const EbModule = () => {
                 alert("Error: "+err)
             })
     }, [])
-    const mydata = data.map((item, key) => {
+    const mydata = data && (data.map((item, key) => {
         return <tr key={key}><td>{item.bst_name}</td><td>{item.pre_reading}</td><td>{item.curr_reading}</td><td>{item.billed_units}</td><td>{moment(item.bill_date).format('LL')}</td><td>Rs. {item.bill_amount}</td><td><button className={item.status==='PENDING'?"w3-btn w3-blue":(item.status === 'PAID'?"w3-btn w3-green":(item.status === 'REJECT'?"w3-btn w3-red":"w3-btn w3-yellow"))}>{item.status}</button></td></tr>
-    })
+    }))
     return (
         <div>
             <Navbar onClick={()=>history.goBack()} />
@@ -54,6 +63,7 @@ const EbModule = () => {
                     </table>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }

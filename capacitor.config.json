@@ -1,0 +1,6 @@
+{
+  "appId": "com.sifyApp.android",
+  "appName": "sifyApp",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}
