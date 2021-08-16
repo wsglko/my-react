@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar'
 import moment from 'moment'
 import axios from 'axios'
 import DatePicker from 'react-date-picker'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NewEpm = () => {
     let history = useHistory()
@@ -29,16 +31,19 @@ const NewEpm = () => {
         axios.post("https://sksinfo.000webhostapp.com/api-add/add-sify-epm.php", JSON.stringify(formData))
             .then(res => {
                 if (res.data === "inserted") {
-                    alert("Data Posted")
+                    //alert("Data Posted")
+                    toast.success("Data Posted");
                     history.push("/bstlist")
                 } else {
-                    alert("Error: " + res.data)
-                    console.log(res.data)
+                    //alert("Error: " + res.data)
+                    //console.log(res.data)
+                    toast.error("Error: " + res.data);
                 }
             })
             .catch(err => {
-                console.log(err)
-                alert("Error: "+err)
+                //console.log(err)
+                //alert("Error: "+err)
+                toast.warning("Error: " + err);
             })
     }
     return (
@@ -157,6 +162,7 @@ const NewEpm = () => {
                 <div className="w3-cell-row">
                     <button className="w3-btn w3-blue w3-wide w3-block" onClick={postData}>Save</button>
                 </div>
+                <ToastContainer />
             </div>
         </div>
     )
