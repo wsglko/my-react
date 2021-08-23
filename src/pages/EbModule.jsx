@@ -34,7 +34,7 @@ const EbModule = () => {
             })
     }, [])
     const mydata = data && (data.map((item, key) => {
-        return <tr key={key}><td>{item.bst_name}</td><td>{item.pre_reading}</td><td>{item.curr_reading}</td><td>{item.billed_units}</td><td>{moment(item.bill_date).format('LL')}</td><td>Rs. {item.bill_amount}</td><td><button className={item.status==='PENDING'?"w3-btn w3-blue":(item.status === 'PAID'?"w3-btn w3-green":(item.status === 'REJECT'?"w3-btn w3-red":"w3-btn w3-yellow"))}>{item.status}</button></td></tr>
+        return <tr key={key}><td>{item.bst_name}</td><td>{item.pre_reading}</td><td>{item.curr_reading}</td><td>{item.billed_units}</td><td>{moment(item.bill_date).format('LL')}</td><td>{moment(item.update_on).format('LL')}</td><td>Rs. {item.bill_amount}</td><td><button className={item.status==='PENDING'?"w3-btn w3-blue":(item.status === 'PAID'?"w3-btn w3-green":(item.status === 'REJECT'?"w3-btn w3-red":"w3-btn w3-yellow"))}>{item.status}</button></td></tr>
     }))
     return (
         <div>
@@ -53,6 +53,7 @@ const EbModule = () => {
                                 <th>Current Reading</th>
                                 <th>Billed Units</th>
                                 <th>Bill Date</th>
+                                <th>Raised On</th>
                                 <th>Bill Amount</th>
                                 <th>Status</th>
                             </tr>

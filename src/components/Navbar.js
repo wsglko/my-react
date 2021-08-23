@@ -7,7 +7,6 @@ const Navbar = ({onClick}) => {
     <div className="w3-top">
       <div className="w3-bar w3-green w3-padding">
         <Link to="/" className="w3-bar-item w3-button">Home</Link>
-        <Link to="#" className="w3-bar-item w3-button">GIS</Link>
         <div className="w3-dropdown-hover">
           <Link to="#" className="w3-bar-item w3-button">Infra</Link>
           <div className="w3-dropdown-content w3-green w3-bar-block w3-card-4">

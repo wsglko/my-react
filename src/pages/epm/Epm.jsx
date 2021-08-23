@@ -68,7 +68,7 @@ const Epm = () => {
             });
     }
 
-    const myData = search === "" && txtSearch === "" ? empList.map((epm) => { return <tr key={epm.id}><td>{epm.bst_name}</td><td>{epm.curr_reading}</td><td>{epm.billed_units}</td><td>{moment(epm.bill_date).format('LL')}</td><td><b>Rs.</b>{epm.bill_amount}</td><td><button onClick={(e) => setShow(true)} className={epm.status === 'PENDING' ? "w3-btn w3-blue" : (epm.status === 'PAID' ? "w3-btn w3-green" : (epm.status === 'REJECT' ? "w3-btn w3-red" : "w3-btn w3-yellow"))}>{epm.status}</button></td><td><button onClick={() => deleteRecord(epm.id)} className="w3-btn w3-tiny w3-red"><i className="fa fa-trash"></i></button></td></tr> }) : empList.filter((item) => { return item.status.includes(search) && item.bst_name.toLowerCase().includes(txtSearch.toLowerCase()) }).map((epm) => { return <tr key={epm.id}><td>{epm.bst_name}</td><td>{epm.curr_reading}</td><td>{epm.billed_units}</td><td>{moment(epm.bill_date).format('LL')}</td><td><b>Rs.</b>{epm.bill_amount}</td><td><button onClick={(e) => setShow(true)} className={epm.status === 'PENDING' ? "w3-btn w3-blue" : (epm.status === 'PAID' ? "w3-btn w3-green" : (epm.status === 'REJECT' ? "w3-btn w3-red" : "w3-btn w3-yellow"))}>{epm.status}</button></td><td><button onClick={() => deleteRecord(epm.id)} className="w3-btn w3-tiny w3-red"><i className="fa fa-trash"></i></button></td></tr> })
+    const myData = search === "" && txtSearch === "" ? empList.map((epm) => { return <tr key={epm.id}><td>{epm.bst_name}</td><td>{epm.curr_reading}</td><td>{epm.billed_units}</td><td>{moment(epm.bill_date).format('LL')}</td><td>{moment(epm.update_on).format('LL')}</td><td><b>Rs.</b>{epm.bill_amount}</td><td><button onClick={(e) => setShow(true)} className={epm.status === 'PENDING' ? "w3-btn w3-blue" : (epm.status === 'PAID' ? "w3-btn w3-green" : (epm.status === 'REJECT' ? "w3-btn w3-red" : "w3-btn w3-yellow"))}>{epm.status}</button></td><td><button onClick={() => deleteRecord(epm.id)} className="w3-btn w3-tiny w3-red"><i className="fa fa-trash"></i></button></td></tr> }) : empList.filter((item) => { return item.status.includes(search) && item.bst_name.toLowerCase().includes(txtSearch.toLowerCase()) }).map((epm) => { return <tr key={epm.id}><td>{epm.bst_name}</td><td>{epm.curr_reading}</td><td>{epm.billed_units}</td><td>{moment(epm.bill_date).format('LL')}</td><td><b>Rs.</b>{epm.bill_amount}</td><td><button onClick={(e) => setShow(true)} className={epm.status === 'PENDING' ? "w3-btn w3-blue" : (epm.status === 'PAID' ? "w3-btn w3-green" : (epm.status === 'REJECT' ? "w3-btn w3-red" : "w3-btn w3-yellow"))}>{epm.status}</button></td><td><button onClick={() => deleteRecord(epm.id)} className="w3-btn w3-tiny w3-red"><i className="fa fa-trash"></i></button></td></tr> })
     return (
         <div>
             <Navbar onClick={() => history.goBack()} />
@@ -101,6 +101,7 @@ const Epm = () => {
                                 <th>Last Reading</th>
                                 <th>Billed Units</th>
                                 <th>Bill Date</th>
+                                <th>Raised On</th>
                                 <th>Bill Amount</th>
                                 <th>Status</th>
                                 <th>Action</th>

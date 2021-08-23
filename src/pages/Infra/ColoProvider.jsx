@@ -2,7 +2,6 @@ import React from 'react'
 import { Component } from 'react'
 import { useParams, useHistory, Link  } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
-//import '../../components/bootstrap.min.css'
 const ColoProvider = () => {
     let history = useHistory()
     return (
