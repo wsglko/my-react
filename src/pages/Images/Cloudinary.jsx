@@ -44,7 +44,7 @@ const Cloudinary = () => {
                 </button>
                 <div>
                     <h3>Uploaded Image</h3>
-                    <img src={url} height="100" width="150" />
+                    <img src={image} height="100" width="150" />
                 </div>
             </div>
         </div>
