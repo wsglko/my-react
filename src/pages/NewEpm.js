@@ -25,8 +25,10 @@ const NewEpm = () => {
     const [StatusDate, setStatusDate] = useState(new Date())
     const [remarks, setRemarks] = useState("")
     const [updateon, setUpdateon] = useState(new Date())
+    const [fromDate, setFromDate] = useState(new Date())
+    const [toDate, setToDate] = useState(new Date())
 
-    const formData = {"bst_id":bstid, "bst_name":bstname, "pre_reading":preReading, "curr_reading":currReading, "billed_units":dfReading, "req_id":reqid, "bill_date":billdate, "bill_amount":billamount, "benif_name":benifname, "status":ebStatus, "status_date":StatusDate, "remarks":remarks, "update_on":updateon}
+    const formData = {"bst_id":bstid, "bst_name":bstname, "pre_reading":preReading, "curr_reading":currReading, "billed_units":dfReading, "req_id":reqid, "bill_date":billdate, "from_date":fromDate, "to_date":toDate, "bill_amount":billamount, "benif_name":benifname, "status":ebStatus, "status_date":StatusDate, "remarks":remarks, "update_on":updateon}
     const postData = () => {
         axios.post("https://sksinfo.000webhostapp.com/api-add/add-sify-epm.php", JSON.stringify(formData))
             .then(res => {
@@ -92,6 +94,31 @@ const NewEpm = () => {
                     </div>
                     <div className="w3-container w3-cell w3-mobile">
                         <input type="text" className="w3-input" value={dfReading} onChange={(e)=>setDfReading(e.target.value)} />
+                    </div>
+                </div>
+                <br />
+                <div className="w3-cell-row">
+                    <div className="w3-container w3-cell w3-mobile">
+                        <label className="w3-text"><strong>From Date:</strong></label>
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <div>
+                            <DatePicker
+                                onChange={setFromDate}
+                                value={fromDate}
+                            />
+                        </div>
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <label className="w3-text"><strong>To Date:</strong></label>
+                    </div>
+                    <div className="w3-container w3-cell w3-mobile">
+                        <div>
+                            <DatePicker
+                                onChange={setToDate}
+                                value={toDate}
+                            />
+                        </div>
                     </div>
                 </div>
                 <br />

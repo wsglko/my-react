@@ -42,6 +42,7 @@ const Cloudinary = () => {
             swal("Image Url is empty");
             return;
         }
+        axios.post("")
     }
     return (
         <div>
